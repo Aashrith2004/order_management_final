@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='confirm_order.css') }}">
+</head>
+<body>
+    <div class="confirmation-container">
+        <h1>🎉 Order Placed Successfully! 🎉</h1>
+        <p>Thank you for your order! Your items will be delivered to:</p>
+        
+        <div class="details">
+            <p><strong>Delivery Address:</strong> {{ delivery_address }}</p>
+            <p><strong>Phone Number:</strong> {{ phone_number }}</p>
+        </div>
+
+        <div class="actions">
+            <button onclick="window.location.href='/'">Return to Home</button>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Overview</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container my-5">
+        <h1 class="text-center mb-4">Product Overview</h1>
+        <form action="/place_order" method="POST">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Product</th>
+                            <th>Price</th>
+                            <th>Quantity Available</th>
+                            <th>Quantity to Order</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for product in products %}
+                        <tr>
+                            <td>{{ product['stock_name'] }}</td>
+                            <td>${{ product['price'] }}</td>
+                            <td>{{ product['quantity'] }}</td>
+                            <td>
+                                <input type="number" 
+                                       name="quantity_{{ product['stock_id'] }}" 
+                                       class="form-control"
+                                       min="0" 
+                                       max="{{ product['quantity'] }}" 
+                                       value="0">
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="mb-3">
+                <label for="delivery_address" class="form-label">Delivery Address:</label>
+                <textarea id="delivery_address" name="delivery_address" class="form-control" rows="2" required></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label for="pin_code" class="form-label">Pin Code:</label>
+                <input type="text" id="pin_code" name="pin_code" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="phone_number" class="form-label">Phone Number:</label>
+                <input type="text" id="phone_number" name="phone_number" class="form-control" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">Place Order</button>
+        </form>
+    </div>
+</body>
+</html>
